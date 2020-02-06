@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Денис Савченко](https://up.htmlacademy.ru/react/3/user/869015).
-* Наставник: `Неизвестно`.
+* Наставник: [Олег Липский](https://htmlacademy.ru/profile/id43358).
 
 ---
 
