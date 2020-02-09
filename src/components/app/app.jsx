@@ -2,6 +2,7 @@ import React from "react";
 import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 
+const onPlaceNameClick = () => {};
 
 const App = (props) => {
   const {rentOffers, placesList} = props;
@@ -9,6 +10,7 @@ const App = (props) => {
     <Main
       rentOffers={rentOffers}
       placesList={placesList}
+      onPlaceNameClick={onPlaceNameClick}
     />
   );
 };
