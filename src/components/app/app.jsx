@@ -15,7 +15,9 @@ const App = (props) => {
 
 App.propTypes = {
   rentOffers: PropTypes.number.isRequired,
-  placesList: PropTypes.array.isRequired,
+  placesList: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+  ).isRequired,
 };
 
 
