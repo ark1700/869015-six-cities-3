@@ -3,6 +3,7 @@ import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
 
+
 Enzyme.configure({
   adapter: new Adapter(),
 });
@@ -10,10 +11,13 @@ Enzyme.configure({
 it(`Should place name link be pressed`, () => {
   const onPlaceNameClick = jest.fn();
 
+  const placesList = [`Canal View Prinsengracht`, `Wood and stone place`];
+  const placeNameClicks = placesList.length;
+
   const main = shallow(
       <Main
         rentOffers={369}
-        placesList={[`Canal View Prinsengracht`, `Wood and stone place`]}
+        placesList={placesList}
         onPlaceNameClick={onPlaceNameClick}
       />
   );
@@ -22,5 +26,5 @@ it(`Should place name link be pressed`, () => {
 
   PlaceNames.forEach((placeName) => placeName.simulate(`click`));
 
-  expect(onPlaceNameClick.mock.calls.length).toBe(2);
+  expect(onPlaceNameClick.mock.calls.length).toBe(placeNameClicks);
 });

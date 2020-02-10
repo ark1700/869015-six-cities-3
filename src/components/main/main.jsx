@@ -92,7 +92,7 @@ const Main = (props) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {placesList.map((place) => (
-                  <article className="cities__place-card place-card" key={place + Math.random()}>
+                  <article className="cities__place-card place-card" key={place}>
                     <div className="cities__image-wrapper place-card__image-wrapper">
                       <a href="#">
                         <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image"/>
@@ -138,7 +138,9 @@ const Main = (props) => {
 
 Main.propTypes = {
   rentOffers: PropTypes.number.isRequired,
-  placesList: PropTypes.array.isRequired,
+  placesList: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+  ).isRequired,
   onPlaceNameClick: PropTypes.func.isRequired,
 };
 
