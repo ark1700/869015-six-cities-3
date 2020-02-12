@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
+import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 
 const Main = (props) => {
   const {rentOffers, placesList} = props;
@@ -104,17 +105,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   rentOffers: PropTypes.number.isRequired,
-  placesList: PropTypes.arrayOf(
-      PropTypes.exact({
-        city: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isFavorite: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-      })
-  ).isRequired,
+  placesList: placesListPropTypes
 };
 
 

@@ -1,19 +1,21 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {placeCardPropTypes} from "../../prop-types/place-card.prop-types.js";
+
+const MAX_REITING = 5;
+
+const getRaitingWidth = (ratingNumber) => {
+  return (ratingNumber / MAX_REITING * 100) + `%`;
+};
 
 class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
+
   }
 
   render() {
     const {name, price, type, rating, isFavorite, isPremium, onPlaceNameClick} = this.props.placeCard;
-
-    const getRaiting = (ratingNumber) => {
-      const MAX_REITING = 5;
-      return (ratingNumber / MAX_REITING * 100) + `%`;
-    };
-
 
     return (
       <article
@@ -47,7 +49,7 @@ class PlaceCard extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{width: getRaiting(rating)}} ></span>
+              <span style={{width: getRaitingWidth(rating)}} ></span>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
@@ -62,15 +64,7 @@ class PlaceCard extends PureComponent {
 }
 
 PlaceCard.propTypes = {
-  placeCard: PropTypes.exact({
-    city: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-  }).isRequired,
+  placeCard: placeCardPropTypes,
   onPlaceCardMouseOver: PropTypes.func,
 };
 

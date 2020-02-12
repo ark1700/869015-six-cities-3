@@ -1,22 +1,24 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
+import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 
 class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
-
+    this.state = {activeCard: null};
   }
 
   render() {
     const {placesList} = this.props;
     return (
       <div className="cities__places-list places__list tabs__content">
-        {placesList.slice()
+        {placesList
           .map((placeItem, i) => <PlaceCard
             key={`place-card-${i}`}
             placeCard={placeItem}
-            onPlaceCardMouseOver={() => {}}/>)
+            onPlaceCardMouseOver={() => {
+              this.setState({activeCard: placeItem});
+            }}/>)
         }
       </div>
     );
@@ -24,17 +26,7 @@ class PlacesList extends PureComponent {
 }
 
 PlacesList.propTypes = {
-  placesList: PropTypes.arrayOf(
-      PropTypes.exact({
-        city: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isFavorite: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-      })
-  ).isRequired
+  placesList: placesListPropTypes
 };
 
 export default PlacesList;
