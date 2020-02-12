@@ -18,7 +18,15 @@ const App = (props) => {
 App.propTypes = {
   rentOffers: PropTypes.number.isRequired,
   placesList: PropTypes.arrayOf(
-      PropTypes.string.isRequired
+      PropTypes.exact({
+        city: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+      })
   ).isRequired,
 };
 
