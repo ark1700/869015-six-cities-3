@@ -16,7 +16,6 @@ class PlacesList extends PureComponent {
       <div className="cities__places-list places__list tabs__content">
         {placesList
           .map((placeItem, i) => {
-            this.placeItem = placeItem;
             return <PlaceCard
               key={`place-card-${i}`}
               placeCard={placeItem}
