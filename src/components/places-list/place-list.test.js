@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import PlacesList from "./places-list.jsx";
 
-it(`Should Main render correctly`, () => {
+it(`Should PlacesList render correctly`, () => {
   const placesList = [
     {
       city: `Amsterdam`,
@@ -32,9 +32,9 @@ it(`Should Main render correctly`, () => {
       isPremium: false,
     }
   ];
+
   const tree = renderer
-    .create(<Main
-      rentOffers={369}
+    .create(<PlacesList
       placesList={placesList}
     />)
     .toJSON();
