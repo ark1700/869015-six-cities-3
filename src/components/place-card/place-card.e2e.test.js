@@ -24,7 +24,7 @@ it(`Should place name link be pressed`, () => {
   const placeCard = shallow(
       <PlaceCard
         placeCard={placeItem}
-        onPlaceCardMouseOver={onPlaceCardMouseOverFunc}
+        setActiveCard={onPlaceCardMouseOverFunc}
       />
   );
 

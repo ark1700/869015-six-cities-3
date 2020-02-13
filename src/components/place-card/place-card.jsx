@@ -12,6 +12,7 @@ class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.onPlaceCardMouseOver = this.onPlaceCardMouseOver.bind(this);
   }
 
   render() {
@@ -21,7 +22,7 @@ class PlaceCard extends PureComponent {
       <article
         className="cities__place-card place-card"
         key={name}
-        onMouseOver={this.props.onPlaceCardMouseOver}>
+        onMouseOver={this.onPlaceCardMouseOver}>
 
         {isPremium ?
           <div className="place-card__mark">
@@ -61,11 +62,15 @@ class PlaceCard extends PureComponent {
       </article>
     );
   }
+
+  onPlaceCardMouseOver() {
+    this.props.setActiveCard(this.props.placeCard);
+  }
 }
 
 PlaceCard.propTypes = {
   placeCard: placeCardPropTypes,
-  onPlaceCardMouseOver: PropTypes.func,
+  setActiveCard: PropTypes.func,
 };
 
 export default PlaceCard;

@@ -6,6 +6,8 @@ class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {activeCard: null};
+
+    this.setActiveCard = this.setActiveCard.bind(this);
   }
 
   render() {
@@ -13,20 +15,25 @@ class PlacesList extends PureComponent {
     return (
       <div className="cities__places-list places__list tabs__content">
         {placesList
-          .map((placeItem, i) => <PlaceCard
-            key={`place-card-${i}`}
-            placeCard={placeItem}
-            onPlaceCardMouseOver={() => {
-              this.setState({activeCard: placeItem});
-            }}/>)
+          .map((placeItem, i) => {
+            this.placeItem = placeItem;
+            return <PlaceCard
+              key={`place-card-${i}`}
+              placeCard={placeItem}
+              setActiveCard={this.setActiveCard}/>;
+          })
         }
       </div>
     );
   }
+
+  setActiveCard(placeItem) {
+    this.setState({activeCard: placeItem});
+  }
 }
 
 PlacesList.propTypes = {
-  placesList: placesListPropTypes
+  placesList: placesListPropTypes,
 };
 
 export default PlacesList;
