@@ -1,12 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {placeCardPropTypes} from "../../prop-types/place-card.prop-types.js";
+import {getRaitingWidth} from "../../utils/utils.js";
 
-const MAX_REITING = 5;
-
-const getRaitingWidth = (ratingNumber) => {
-  return (ratingNumber / MAX_REITING * 100) + `%`;
-};
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -16,8 +12,8 @@ class PlaceCard extends PureComponent {
   }
 
   render() {
-    const {name, price, type, rating, isFavorite, isPremium, onPlaceNameClick} = this.props.placeCard;
-
+    const {onPlaceNameClick} = this.props;
+    const {name, price, type, rating, isFavorite, isPremium} = this.props.placeCard;
     return (
       <article
         className="cities__place-card place-card"
@@ -55,7 +51,9 @@ class PlaceCard extends PureComponent {
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#" onClick={onPlaceNameClick}>{name}</a>
+            <a href="#" onClick={
+              onPlaceNameClick
+            }>{name}</a>
           </h2>
           <p className="place-card__type">{type}</p>
         </div>
@@ -71,6 +69,7 @@ class PlaceCard extends PureComponent {
 PlaceCard.propTypes = {
   placeCard: placeCardPropTypes,
   setActiveCard: PropTypes.func,
+  onPlaceNameClick: PropTypes.func,
 };
 
 export default PlaceCard;

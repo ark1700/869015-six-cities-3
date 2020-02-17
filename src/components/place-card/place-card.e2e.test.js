@@ -10,6 +10,7 @@ Enzyme.configure({
 
 it(`Should place name link be pressed`, () => {
   const onPlaceCardMouseOverFunc = jest.fn();
+  const onPlaceNameClickFunc = jest.fn();
 
   const placeItem = {
     city: `Amsterdam`,
@@ -25,10 +26,15 @@ it(`Should place name link be pressed`, () => {
       <PlaceCard
         placeCard={placeItem}
         setActiveCard={onPlaceCardMouseOverFunc}
+        onPlaceNameClick={onPlaceNameClickFunc}
       />
   );
 
   placeCard.simulate(`mouseover`);
 
+  const namePlaceCard = placeCard.find(`.place-card__name a`);
+  namePlaceCard.simulate(`click`);
+
   expect(onPlaceCardMouseOverFunc.mock.calls.length).toBe(1);
+  expect(onPlaceNameClickFunc.mock.calls.length).toBe(1);
 });

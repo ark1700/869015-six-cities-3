@@ -23,6 +23,7 @@ const OffersNames = [
   `Nice, cozy, warm big bed apartment`,
 ];
 
+
 const getRandomFromArray = (items) => {
   const itemsArray = Array.from(items);
   const randomIndex = Math.floor(Math.random() * itemsArray.length);

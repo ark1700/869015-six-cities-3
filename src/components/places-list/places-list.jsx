@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PlaceCard from "../place-card/place-card.jsx";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
+import PropTypes from "prop-types";
 
 class PlacesList extends PureComponent {
   constructor(props) {
@@ -11,7 +12,7 @@ class PlacesList extends PureComponent {
   }
 
   render() {
-    const {placesList} = this.props;
+    const {placesList, onPlaceNameClick} = this.props;
     return (
       <div className="cities__places-list places__list tabs__content">
         {placesList
@@ -19,7 +20,9 @@ class PlacesList extends PureComponent {
             return <PlaceCard
               key={`place-card-${i}`}
               placeCard={placeItem}
-              setActiveCard={this.setActiveCard}/>;
+              setActiveCard={this.setActiveCard}
+              onPlaceNameClick={onPlaceNameClick}
+            />;
           })
         }
       </div>
@@ -33,6 +36,7 @@ class PlacesList extends PureComponent {
 
 PlacesList.propTypes = {
   placesList: placesListPropTypes,
+  onPlaceNameClick: PropTypes.func,
 };
 
 export default PlacesList;
