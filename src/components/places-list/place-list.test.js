@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import PlacesList from "./places-list.jsx";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 it(`Should PlacesList render correctly`, () => {
   const placesList = [
@@ -85,9 +86,17 @@ it(`Should PlacesList render correctly`, () => {
   ];
 
   const tree = renderer
-    .create(<PlacesList
-      placesList={placesList}
-    />)
+    .create(
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
+              <PlacesList
+                placesList={placesList}
+              />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
