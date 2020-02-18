@@ -4,7 +4,7 @@ import PlacesList from "../places-list/places-list.jsx";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 
 const Main = (props) => {
-  const {rentOffers, placesList, onPlaceNameClick} = props;
+  const {rentOffers, placesList, setActiveCard} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -93,7 +93,7 @@ const Main = (props) => {
               </form>
               <PlacesList
                 placesList={placesList}
-                onPlaceNameClick={onPlaceNameClick}
+                setActiveCard={setActiveCard}
               />
             </section>
             <div className="cities__right-section">
@@ -109,7 +109,7 @@ const Main = (props) => {
 Main.propTypes = {
   rentOffers: PropTypes.number.isRequired,
   placesList: placesListPropTypes,
-  onPlaceNameClick: PropTypes.func,
+  setActiveCard: PropTypes.func,
 };
 
 

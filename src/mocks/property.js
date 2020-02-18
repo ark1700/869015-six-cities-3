@@ -34,4 +34,5 @@ export const propertyMock = {
     `Baby seat`,
     `Cabel TV`,
   ],
+  isFavorite: true,
 };

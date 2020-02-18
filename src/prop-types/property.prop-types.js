@@ -20,4 +20,4 @@ export const propertyPropTypes = PropTypes.shape({
   features: PropTypes.arrayOf(
       PropTypes.string
   ).isRequired,
-}).isRequired;
+});

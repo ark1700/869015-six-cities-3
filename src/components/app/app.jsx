@@ -6,68 +6,46 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types";
 import {propertyMock} from "../../mocks/property.js";
 
-const Page = {
-  MAIN: `main`,
-  PROPERTY: `property`
-};
-
 class App extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      page: Page.MAIN,
+      activeCard: propertyMock,
     };
-
-    this._onNameCardClick = this._onNameCardClick.bind(this);
-    this._renderGameScreen = this._renderGameScreen.bind(this);
-  }
-
-  _renderGameScreen() {
-    const {page} = this.state;
-    const {rentOffers, placesList} = this.props;
-
-    switch (page) {
-      case Page.MAIN:
-        return (
-          <Main
-            rentOffers={rentOffers}
-            placesList={placesList}
-            onPlaceNameClick={this._onNameCardClick}
-          />
-        );
-      case Page.PROPERTY:
-        return (
-          <Property offer={propertyMock} />
-        );
-    }
-
-    return null;
+    this.setActiveCard = this.setActiveCard.bind(this);
   }
 
   render() {
+    const {rentOffers, placesList} = this.props;
+
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {this._renderGameScreen()}
+            <Main
+              rentOffers={rentOffers}
+              placesList={placesList}
+              setActiveCard={this.setActiveCard}
+            />
           </Route>
           <Route exact path="/offer">
-            <Property offer={propertyMock} />
+            <Property offer={this.state.activeCard} />
           </Route>
         </Switch>
       </BrowserRouter>
     );
   }
 
-  _onNameCardClick() {
-    this.setState({page: Page.PROPERTY});
+  setActiveCard(placeItem) {
+    this.setState({activeCard: placeItem});
   }
 }
 
 App.propTypes = {
   rentOffers: PropTypes.number.isRequired,
   placesList: placesListPropTypes,
+  setActiveCard: PropTypes.func,
 };
 
 

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
-import {propertyPropTypes} from "../../prop-types/property.prop-types.js";
 import {getRaitingWidth} from "../../utils/utils.js";
+import {placeCardPropTypes} from "../../prop-types/place-card.prop-types.js";
 
 class Property extends PureComponent {
   constructor(props) {
@@ -326,7 +326,7 @@ class Property extends PureComponent {
 }
 
 Property.propTypes = {
-  offer: propertyPropTypes
+  offer: placeCardPropTypes
 };
 
 export default Property;
