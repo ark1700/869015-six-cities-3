@@ -9,7 +9,9 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      activeCard: null
+    };
     this.setActiveCard = this.setActiveCard.bind(this);
   }
 

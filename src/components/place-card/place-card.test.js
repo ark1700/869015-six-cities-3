@@ -52,7 +52,6 @@ it(`Should PlaceCard render correctly`, () => {
             <PlaceCard
               placeCard={placeItem}
               onPlaceCardMouseOver={emptyFunc}
-              onPlaceCardNameClick={emptyFunc}
             />
           </Route>
         </BrowserRouter>
