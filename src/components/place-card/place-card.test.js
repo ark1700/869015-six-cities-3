@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import PlaceCard from "./place-card.jsx";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 
 const emptyFunc = () => {};
 
@@ -48,14 +48,13 @@ it(`Should PlaceCard render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <PlaceCard
-                placeCard={placeItem}
-                onPlaceCardMouseOver={emptyFunc}
-              />
-            </Route>
-          </Switch>
+          <Route exact path="/">
+            <PlaceCard
+              placeCard={placeItem}
+              onPlaceCardMouseOver={emptyFunc}
+              onPlaceCardNameClick={emptyFunc}
+            />
+          </Route>
         </BrowserRouter>
     )
     .toJSON();

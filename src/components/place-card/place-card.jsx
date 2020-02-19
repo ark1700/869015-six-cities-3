@@ -51,7 +51,7 @@ class PlaceCard extends PureComponent {
             </div>
           </div>
           <h2 className="place-card__name">
-            <Link to="/offer">{title}</Link>
+            <Link to="/offer" onClick={this.props.onPlaceCardNameClick}>{title}</Link>
           </h2>
           <p className="place-card__type">{type}</p>
         </div>
@@ -67,6 +67,7 @@ class PlaceCard extends PureComponent {
 PlaceCard.propTypes = {
   placeCard: placeCardPropTypes,
   setActiveCard: PropTypes.func,
+  onPlaceCardNameClick: PropTypes.func,
 };
 
 export default PlaceCard;

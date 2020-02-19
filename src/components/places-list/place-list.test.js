@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import PlacesList from "./places-list.jsx";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 
 it(`Should PlacesList render correctly`, () => {
   const placesList = [
@@ -88,13 +88,11 @@ it(`Should PlacesList render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <PlacesList
-                placesList={placesList}
-              />
-            </Route>
-          </Switch>
+          <Route exact path="/">
+            <PlacesList
+              placesList={placesList}
+            />
+          </Route>
         </BrowserRouter>
     )
     .toJSON();

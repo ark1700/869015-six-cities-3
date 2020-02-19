@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 
 it(`Should Main render correctly`, () => {
   const placesList = [
@@ -87,14 +87,12 @@ it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <Main
-                rentOffers={369}
-                placesList={placesList}
-              />
-            </Route>
-          </Switch>
+          <Route exact path="/">
+            <Main
+              rentOffers={369}
+              placesList={placesList}
+            />
+          </Route>
         </BrowserRouter>
     )
     .toJSON();

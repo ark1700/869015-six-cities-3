@@ -19,4 +19,4 @@ export const placeCardPropTypes = PropTypes.shape({
     avatar: PropTypes.string,
     isSuper: PropTypes.bool.isRequired,
   }).isRequired,
-}).isRequired;
+});

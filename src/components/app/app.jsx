@@ -4,15 +4,12 @@ import Property from "../property/property.jsx";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types";
-import {propertyMock} from "../../mocks/property.js";
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeCard: propertyMock,
-    };
+    this.state = {};
     this.setActiveCard = this.setActiveCard.bind(this);
   }
 
