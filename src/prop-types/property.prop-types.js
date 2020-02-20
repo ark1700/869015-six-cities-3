@@ -1,22 +1,23 @@
 import PropTypes from "prop-types";
 
-export const placeCardPropTypes = PropTypes.shape({
+export const propertyPropTypes = PropTypes.shape({
   photos: PropTypes.arrayOf(
       PropTypes.string
   ),
-  city: PropTypes.string,
+  isPremium: PropTypes.bool.isRequired,
+  price: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   descr: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   badrooms: PropTypes.number.isRequired,
   guests: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  isPremium: PropTypes.bool.isRequired,
   author: PropTypes.exact({
     name: PropTypes.string.isRequired,
-    avatar: PropTypes.string,
+    avatar: PropTypes.string.isRequired,
     isSuper: PropTypes.bool.isRequired,
   }).isRequired,
+  features: PropTypes.arrayOf(
+      PropTypes.string
+  ).isRequired,
 });

@@ -1,12 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {placeCardPropTypes} from "../../prop-types/place-card.prop-types.js";
+import {getRaitingWidth} from "../../utils/utils.js";
+import {Link} from "react-router-dom";
 
-const MAX_REITING = 5;
-
-const getRaitingWidth = (ratingNumber) => {
-  return (ratingNumber / MAX_REITING * 100) + `%`;
-};
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -16,8 +13,7 @@ class PlaceCard extends PureComponent {
   }
 
   render() {
-    const {name, price, type, rating, isFavorite, isPremium, onPlaceNameClick} = this.props.placeCard;
-
+    const {photos, title, price, type, rating, isFavorite, isPremium} = this.props.placeCard;
     return (
       <article
         className="cities__place-card place-card"
@@ -32,7 +28,7 @@ class PlaceCard extends PureComponent {
         }
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
-            <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
+            <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Place image" />
           </a>
         </div>
         <div className="place-card__info">
@@ -55,7 +51,7 @@ class PlaceCard extends PureComponent {
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#" onClick={onPlaceNameClick}>{name}</a>
+            <Link to="/offer">{title}</Link>
           </h2>
           <p className="place-card__type">{type}</p>
         </div>

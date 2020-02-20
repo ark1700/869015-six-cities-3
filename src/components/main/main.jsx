@@ -4,7 +4,7 @@ import PlacesList from "../places-list/places-list.jsx";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 
 const Main = (props) => {
-  const {rentOffers, placesList} = props;
+  const {rentOffers, placesList, setActiveCard} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -91,7 +91,10 @@ const Main = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <PlacesList placesList={placesList}/>
+              <PlacesList
+                placesList={placesList}
+                setActiveCard={setActiveCard}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -105,7 +108,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   rentOffers: PropTypes.number.isRequired,
-  placesList: placesListPropTypes
+  placesList: placesListPropTypes,
+  setActiveCard: PropTypes.func,
 };
 
 
