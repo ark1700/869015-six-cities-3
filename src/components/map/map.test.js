@@ -1,9 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
-import {BrowserRouter, Route} from "react-router-dom";
+import Map from "./map.jsx";
 
-it(`Should Main render correctly`, () => {
+it(`Render Map`, () => {
   const placesList = [
     {
       city: `amsterdam`,
@@ -87,17 +86,13 @@ it(`Should Main render correctly`, () => {
     },
   ];
 
+  const cityCoords = [52.38333, 4.9];
+
   const tree = renderer
-    .create(
-        <BrowserRouter>
-          <Route exact path="/">
-            <Main
-              rentOffers={369}
-              placesList={placesList}
-            />
-          </Route>
-        </BrowserRouter>
-    )
+    .create(<Map
+      placesList={placesList}
+      cityCoords={cityCoords}
+    />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

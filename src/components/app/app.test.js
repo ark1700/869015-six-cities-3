@@ -42,6 +42,7 @@ it(`Render App`, () => {
         `Cabel TV`,
       ],
       isFavorite: true,
+      map: [52.3909553943508, 4.85309666406198],
     },
     {
       city: `Brussels`,
@@ -81,8 +82,10 @@ it(`Render App`, () => {
         `Cabel TV`,
       ],
       isFavorite: true,
+      map: [52.369553943508, 4.85309666406198],
     },
   ];
+  
   const tree = renderer
     .create(<App
       rentOffers={369}

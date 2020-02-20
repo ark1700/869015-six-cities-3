@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
+import Map from "../map/map.jsx";
+import {CityCoords} from "../../utils/consts.js";
 
 const Main = (props) => {
   const {rentOffers, placesList, setActiveCard} = props;
@@ -97,7 +99,10 @@ const Main = (props) => {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                placesList={placesList}
+                cityCoords={CityCoords[`amsterdam`]}
+              />
             </div>
           </div>
         </div>

@@ -25,6 +25,13 @@ const OffersNames = [
   `Nice, cozy, warm big bed apartment`,
 ];
 
+const MapCoordinates = [
+  [52.3909553943508, 4.85309666406198],
+  [52.369553943508, 4.85309666406198],
+  [52.3909553943508, 4.929309666406198],
+  [52.3809553943508, 4.939309666406198],
+];
+
 
 const getRandomFromArray = (items) => {
   const itemsArray = Array.from(items);
@@ -83,7 +90,8 @@ const generateOffer = () => {
 const generateOffers = (offersNumber) => {
   return new Array(offersNumber)
     .fill(``)
-    .map(generateOffer);
+    .map(generateOffer)
+    .map((offer, i) => (Object.assign(offer, {map: MapCoordinates[i]})));
 };
 
 export default generateOffers;

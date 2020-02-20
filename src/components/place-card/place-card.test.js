@@ -51,7 +51,7 @@ it(`Should PlaceCard render correctly`, () => {
           <Route exact path="/">
             <PlaceCard
               placeCard={placeItem}
-              onPlaceCardMouseOver={emptyFunc}
+              handlePlaceCardMouseOver={emptyFunc}
             />
           </Route>
         </BrowserRouter>

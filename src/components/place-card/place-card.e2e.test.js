@@ -9,7 +9,7 @@ Enzyme.configure({
 });
 
 it(`Should mouse over card`, () => {
-  const onPlaceCardMouseOverFunc = jest.fn();
+  const handlePlaceCardMouseOverFunc = jest.fn();
 
   const placeItem = {
     photos: [
@@ -53,10 +53,10 @@ it(`Should mouse over card`, () => {
   const placeCard = shallow(
       <PlaceCard
         placeCard={placeItem}
-        setActiveCard={onPlaceCardMouseOverFunc}
+        setActiveCard={handlePlaceCardMouseOverFunc}
       />
   );
 
   placeCard.simulate(`mouseover`);
-  expect(onPlaceCardMouseOverFunc.mock.calls.length).toBe(1);
+  expect(handlePlaceCardMouseOverFunc.mock.calls.length).toBe(1);
 });
