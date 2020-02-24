@@ -87,7 +87,7 @@ it(`Render Map`, () => {
   ];
 
   const cityCoords = [52.38333, 4.9];
-
+  jest.mock(`leaflet`);
   const tree = renderer
     .create(<Map
       placesList={placesList}

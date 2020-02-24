@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import leaflet from 'leaflet';
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types";
 
-
 class Map extends PureComponent {
   constructor(props) {
     super(props);

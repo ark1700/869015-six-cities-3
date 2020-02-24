@@ -85,7 +85,7 @@ it(`Render App`, () => {
       map: [52.369553943508, 4.85309666406198],
     },
   ];
-  
+
   const tree = renderer
     .create(<App
       rentOffers={369}

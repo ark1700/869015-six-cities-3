@@ -87,6 +87,7 @@ it(`Should Main render correctly`, () => {
     },
   ];
 
+  jest.mock(`leaflet`);
   const tree = renderer
     .create(
         <BrowserRouter>
