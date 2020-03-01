@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PlaceCard from "../place-card/place-card.jsx";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 import PropTypes from "prop-types";
+import {Cities} from "../../utils/consts";
 
 class PlacesList extends PureComponent {
   constructor(props) {
@@ -30,6 +31,7 @@ class PlacesList extends PureComponent {
 PlacesList.propTypes = {
   placesList: placesListPropTypes,
   setActiveCard: PropTypes.func,
+  activeCity: PropTypes.oneOf(Object.values(Cities)),
 };
 
 export default PlacesList;

@@ -4,48 +4,54 @@ import Property from "../property/property.jsx";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types";
+import {placeCardPropTypes} from "../../prop-types/place-card.prop-types";
+import {connect} from "react-redux";
+import {ActionType} from "../../reducer.js";
+import {Cities} from "../../utils/consts.js";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: null
-    };
-    this.setActiveCard = this.setActiveCard.bind(this);
-  }
-
   render() {
-    const {rentOffers, placesList} = this.props;
-
+    const {placesList, activeCard, setActiveCard, activeCity} = this.props;
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             <Main
-              rentOffers={rentOffers}
               placesList={placesList}
-              setActiveCard={this.setActiveCard}
+              setActiveCard={setActiveCard}
+              activeCity={activeCity}
             />
           </Route>
           <Route exact path="/offer">
-            <Property offer={this.state.activeCard} />
+            <Property offer={activeCard} />
           </Route>
         </Switch>
       </BrowserRouter>
     );
   }
-
-  setActiveCard(placeItem) {
-    this.setState({activeCard: placeItem});
-  }
 }
 
 App.propTypes = {
-  rentOffers: PropTypes.number.isRequired,
   placesList: placesListPropTypes,
   setActiveCard: PropTypes.func,
+  activeCard: placeCardPropTypes,
+  activeCity: PropTypes.oneOf(Object.values(Cities)),
 };
 
+const mapStateToProps = (state) => ({
+  activeCard: state.activeCard,
+  placesList: state.offersList,
+  activeCity: state.activeCity,
+});
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  setActiveCard(placeItem) {
+    dispatch({
+      type: ActionType.SET_ACTIVE_CARD,
+      payload: placeItem,
+    });
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

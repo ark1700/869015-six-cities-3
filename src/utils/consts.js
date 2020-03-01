@@ -7,5 +7,12 @@ const CityCoords = {
   'dusseldorf': [52.38333, 4.9],
 };
 
-export {CityCoords};
+const Cities = {
+  PARIS: `paris`,
+  COLOGNE: `cologne`,
+  AMSTERDAM: `amsterdam`,
+  BRUSSELS: `brussels`,
+};
+
+export {CityCoords, Cities};
 

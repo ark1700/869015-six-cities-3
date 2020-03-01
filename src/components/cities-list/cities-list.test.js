@@ -1,14 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
-import {BrowserRouter, Route} from "react-router-dom";
+import CitiesList from "./cities-list";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {Cities} from '../../utils/consts';
 
 const mockStore = configureStore([]);
 
-it(`Should Main render correctly`, () => {
+it(`Should CitiesList render correctly`, () => {
   const placesList = [
     {
       city: `amsterdam`,
@@ -97,20 +96,14 @@ it(`Should Main render correctly`, () => {
     activeCity: Cities.AMSTERDAM,
   });
 
-  const activeCity = Cities.AMSTERDAM;
-
-  jest.mock(`leaflet`);
+  const activeCity = `amsterdam`;
   const tree = renderer
     .create(
         <Provider store={store}>
-          <BrowserRouter>
-            <Route exact path="/">
-              <Main
-                placesList={placesList}
-                activeCity={activeCity}
-              />
-            </Route>
-          </BrowserRouter>
+          <CitiesList
+            placesList={placesList}
+            activeCity={activeCity}
+          />
         </Provider>
     )
     .toJSON();

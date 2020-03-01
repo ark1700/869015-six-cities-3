@@ -3,11 +3,15 @@ import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 import Map from "../map/map.jsx";
-import {CityCoords} from "../../utils/consts.js";
+import CitiesList from "../cities-list/cities-list.jsx";
+import {CityCoords, Cities} from "../../utils/consts.js";
+import {firstUpperLetter} from "../../utils/utils.js";
 
 const Main = (props) => {
-  const {rentOffers, placesList, setActiveCard} = props;
-
+  const {placesList, setActiveCard, activeCity} = props;
+  const sortedPlacesList = placesList.filter((placeItem) => {
+    return placeItem.city === props.activeCity;
+  });
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -36,48 +40,18 @@ const Main = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>
-                    Paris
-                  </span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <CitiesList
+            placesList={placesList}
+            activeCity={activeCity}
+          />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{rentOffers} places to stay in Amsterdam</b>
+              <b className="places__found">
+                {sortedPlacesList.length} places to stay in {firstUpperLetter(activeCity)}
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -94,14 +68,15 @@ const Main = (props) => {
                 </ul>
               </form>
               <PlacesList
-                placesList={placesList}
+                placesList={sortedPlacesList}
                 setActiveCard={setActiveCard}
+                activeCity={activeCity}
               />
             </section>
             <div className="cities__right-section">
               <Map
-                placesList={placesList}
-                cityCoords={CityCoords[`amsterdam`]}
+                placesList={sortedPlacesList}
+                cityCoords={CityCoords[activeCity]}
               />
             </div>
           </div>
@@ -112,9 +87,9 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  rentOffers: PropTypes.number.isRequired,
   placesList: placesListPropTypes,
   setActiveCard: PropTypes.func,
+  activeCity: PropTypes.oneOf(Object.values(Cities)),
 };
 
 

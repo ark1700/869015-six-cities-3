@@ -1,6 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import {Cities} from '../../utils/consts';
+
+const mockStore = configureStore([]);
 
 it(`Render App`, () => {
   const placesList = [
@@ -86,11 +91,17 @@ it(`Render App`, () => {
     },
   ];
 
+  const store = mockStore({
+    offersList: placesList,
+    activeCity: Cities.AMSTERDAM,
+  });
+
   const tree = renderer
-    .create(<App
-      rentOffers={369}
-      placesList={placesList}
-    />)
+    .create(
+        <Provider store={store}>
+          <App />
+        </Provider>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

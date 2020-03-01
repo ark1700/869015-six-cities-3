@@ -1,3 +1,5 @@
+import {Cities} from '../utils/consts';
+
 const MIN_OFFER_PRICE = 100;
 const MAX_OFFER_PRICE = 1000;
 const MIN_OFFER_GUESTS = 1;
@@ -7,15 +9,6 @@ const MAX_OFFER_RATING = 5;
 const OffersTypes = {
   APARTMENT: `apartment`,
   PRIVATE: `privete room`,
-};
-
-const OffersCities = {
-  PARIS: `paris`,
-  COLOGNE: `cologne`,
-  BRUSSELS: `brussels`,
-  AMSTERDAM: `amsterdam`,
-  HAMBURG: `hamburg`,
-  DUSSELDORF: `dusseldorf`,
 };
 
 const OffersNames = [
@@ -55,7 +48,7 @@ const generateOffer = () => {
       `img/studio-01.jpg`,
       `img/apartment-01.jpg`,
     ],
-    city: getRandomFromObj(OffersCities),
+    city: getRandomFromObj(Cities),
     title: getRandomFromArray(OffersNames),
     descr: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
     An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
@@ -86,6 +79,7 @@ const generateOffer = () => {
     },
   };
 };
+
 
 const generateOffers = (offersNumber) => {
   return new Array(offersNumber)

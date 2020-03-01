@@ -5,4 +5,12 @@ const getRaitingWidth = (ratingNumber) => {
   return (rating / MAX_REITING * 100) + `%`;
 };
 
-export {getRaitingWidth};
+const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+const firstUpperLetter = (string) => {
+  return string[0].toUpperCase() + string.slice(1);
+};
+
+export {getRaitingWidth, extend, firstUpperLetter};
