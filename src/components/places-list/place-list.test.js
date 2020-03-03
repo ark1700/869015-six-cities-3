@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import PlacesList from "./places-list.jsx";
 import {BrowserRouter, Route} from "react-router-dom";
+import {Cities} from "../../utils/consts";
 
 it(`Should PlacesList render correctly`, () => {
   const placesList = [
@@ -85,12 +86,15 @@ it(`Should PlacesList render correctly`, () => {
     },
   ];
 
+  const activeCity = Cities.AMSTERDAM;
+
   const tree = renderer
     .create(
         <BrowserRouter>
           <Route exact path="/">
             <PlacesList
               placesList={placesList}
+              activeCity={activeCity}
             />
           </Route>
         </BrowserRouter>

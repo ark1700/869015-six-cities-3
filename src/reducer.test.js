@@ -87,7 +87,7 @@ const placesList = [
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
-    activeCity: Cities.AMSTERDAM,
+    activeCity: null,
     offersList: [],
     activeCard: null,
   });
@@ -99,7 +99,7 @@ it(`Reducer should set new activeCity`, () => {
     offersList: [],
     activeCard: null,
   }, {
-    type: ActionType.SET_ACTIVE_SITY,
+    type: ActionType.SET_ACTIVE_СITY,
     payload: Cities.PARIS,
   })).toEqual({
     activeCity: Cities.PARIS,
@@ -117,7 +117,7 @@ it(`Reducer should set new offers list`, () => {
     type: ActionType.SET_OFFERS,
     payload: placesList,
   })).toEqual({
-    activeCity: Cities.AMSTERDAM,
+    activeCity: placesList[0].city,
     offersList: placesList,
     activeCard: null,
   });

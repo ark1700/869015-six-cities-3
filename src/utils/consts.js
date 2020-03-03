@@ -12,6 +12,8 @@ const Cities = {
   COLOGNE: `cologne`,
   AMSTERDAM: `amsterdam`,
   BRUSSELS: `brussels`,
+  HAMBURG: `hamburg`,
+  DUSSELDORF: `dusseldorf`,
 };
 
 export {CityCoords, Cities};

@@ -6,15 +6,20 @@ import {firstUpperLetter} from "../../utils/utils.js";
 import {connect} from "react-redux";
 import {ActionType} from "../../reducer";
 
-class CardList extends PureComponent {
+const MAX_OFFERS_NUMBER = 6;
 
+const getSixUniqueCities = (offersList) => {
+  return Array.from(
+      new Set(
+          offersList.map((placeItem) => placeItem.city)
+      )
+  ).slice(-MAX_OFFERS_NUMBER);
+};
+
+class CardList extends PureComponent {
   render() {
     const {placesList, activeCity, setActiveCity} = this.props;
-    const cities = Array.from(
-        new Set(
-            placesList.map((placeItem) => placeItem.city)
-        )
-    ).slice(-6);
+    const cities = getSixUniqueCities(placesList);
     return (
       <section className="locations container">
         <ul className="locations__list tabs__list">
@@ -43,11 +48,7 @@ class CardList extends PureComponent {
 
   componentDidMount() {
     const {placesList, setActiveCity} = this.props;
-    const cities = Array.from(
-        new Set(
-            placesList.map((placeItem) => placeItem.city)
-        )
-    ).slice(-6);
+    const cities = getSixUniqueCities(placesList);
     if (cities) {
       setActiveCity(cities[0]);
     }
@@ -55,7 +56,6 @@ class CardList extends PureComponent {
 
   componentWillUnmount() {
     const {setActiveCity} = this.props;
-
     setActiveCity(null);
   }
 }
@@ -74,7 +74,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setActiveCity(city) {
     dispatch({
-      type: ActionType.SET_ACTIVE_SITY,
+      type: ActionType.SET_ACTIVE_СITY,
       payload: city,
     });
   },

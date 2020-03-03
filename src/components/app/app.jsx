@@ -34,6 +34,7 @@ class App extends PureComponent {
 App.propTypes = {
   placesList: placesListPropTypes,
   setActiveCard: PropTypes.func,
+  setActiveCity: PropTypes.func,
   activeCard: placeCardPropTypes,
   activeCity: PropTypes.oneOf(Object.values(Cities)),
 };
