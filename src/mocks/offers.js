@@ -38,7 +38,7 @@ const getRandomFromObj = (items) => {
   return itemsArray[randomIndex];
 };
 
-const generateOffer = (count) => {
+const generateOffer = () => {
   return {
     photos: [
       `img/room.jpg`,
