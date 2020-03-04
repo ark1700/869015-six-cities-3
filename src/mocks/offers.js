@@ -38,7 +38,7 @@ const getRandomFromObj = (items) => {
   return itemsArray[randomIndex];
 };
 
-const generateOffer = () => {
+const generateOffer = (count) => {
   return {
     photos: [
       `img/room.jpg`,
@@ -84,7 +84,9 @@ const generateOffer = () => {
 const generateOffers = (offersNumber) => {
   return new Array(offersNumber)
     .fill(``)
-    .map(generateOffer)
+    .map((item, count) => {
+      return generateOffer(count);
+    })
     .map((offer, i) => (Object.assign(offer, {map: MapCoordinates[i]})));
 };
 

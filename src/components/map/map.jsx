@@ -13,13 +13,12 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <section className="cities__map map" id="map"></section>
+      null
     );
   }
 
   createMap() {
     const city = this.props.cityCoords;
-
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]

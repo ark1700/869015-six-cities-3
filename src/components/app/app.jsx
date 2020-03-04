@@ -8,6 +8,9 @@ import {placeCardPropTypes} from "../../prop-types/place-card.prop-types";
 import {connect} from "react-redux";
 import {ActionType} from "../../reducer.js";
 import {Cities} from "../../utils/consts.js";
+import {reviews} from "../../mocks/reviews.js";
+import {nearPlaces} from "../../mocks/near-places";
+
 
 class App extends PureComponent {
   render() {
@@ -23,7 +26,11 @@ class App extends PureComponent {
             />
           </Route>
           <Route exact path="/offer">
-            <Property offer={activeCard} />
+            <Property
+              offer={activeCard}
+              reviews={reviews}
+              nearPlaces={nearPlaces}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

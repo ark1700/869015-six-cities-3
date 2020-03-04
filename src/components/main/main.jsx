@@ -70,13 +70,15 @@ const Main = (props) => {
             }
 
             <div className="cities__right-section">
-              {noPlaces ?
-                null :
-                <Map
-                  placesList={sortedPlacesList}
-                  cityCoords={CityCoords[activeCity]}
-                />
-              }
+              <section className="cities__map map" id="map">
+                {noPlaces ?
+                  null :
+                  <Map
+                    placesList={sortedPlacesList}
+                    cityCoords={CityCoords[activeCity]}
+                  />
+                }
+              </section>
             </div>
           </div>
         </div>
