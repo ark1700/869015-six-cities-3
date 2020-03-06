@@ -2,7 +2,7 @@ const reviews = [
   {
     comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     rating: 3.2,
-    date: `2019-05-05T14:13:56.569Z`,
+    date: `2019-06-05T14:13:56.569Z`,
     user: {
       avatarUrl: `img/avatar-max.jpg`,
       name: `Max`

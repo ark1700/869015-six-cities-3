@@ -60,7 +60,7 @@ const Main = (props) => {
 
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {placesList.length} places to stay in {firstUpperLetter(activeCity)}
+                {sortedPlacesList.length} places to stay in {firstUpperLetter(activeCity)}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
