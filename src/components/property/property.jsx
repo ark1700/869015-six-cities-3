@@ -4,9 +4,10 @@ import {getRaitingWidth} from "../../utils/utils.js";
 import {placeCardPropTypes} from "../../prop-types/place-card.prop-types.js";
 import {CityCoords} from "../../utils/consts";
 import Map from "../map/map.jsx";
-import NearPlaces from "../near-places-list/neat-places-list.jsx";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
-import {reviewsPropTypes} from "../../prop-types/reviews.prop-types.js";
+import {reviewPropTypes} from "../../prop-types/review.prop-types.js";
+import PropTypes from "prop-types";
+import PlacesList from "../places-list/places-list.jsx";
 
 class Property extends PureComponent {
   constructor(props) {
@@ -49,7 +50,7 @@ class Property extends PureComponent {
   render() {
     const {photos, isPremium, price, title, descr, type, badrooms, guests, rating, features, city} = this.props.offer;
     const {name, avatar, isSuper} = this.props.offer.author;
-    const {reviews, nearPlaces} = this.props;
+    const {reviews, nearPlaces, setActiveCard} = this.props;
 
     return (
       <div className="page">
@@ -199,20 +200,24 @@ class Property extends PureComponent {
                 </section>
               </div>
             </div>
-            <section className="property__map map" id="map">
-              {nearPlaces.length === 0 || nearPlaces === undefined ?
-                null :
-                <Map
-                  cityCoords={CityCoords[city]}
-                  placesList={nearPlaces}
-                />
-              }
-            </section>
+            {!(nearPlaces === undefined || nearPlaces.length === 0) && (
+              <Map
+                cityCoords={CityCoords[city]}
+                placesList={nearPlaces}
+                mapClass={`property__map`}
+              />
+            )}
           </section>
           <div className="container">
-            <NearPlaces
-              nearPlaces={nearPlaces}
-            />
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            {!(nearPlaces === undefined || nearPlaces.length === 0) && (
+              <PlacesList
+                placesList={nearPlaces}
+                setActiveCard={setActiveCard}
+                listClass={`near-places__list`}
+                cardClass={`near-places__card`}
+              />
+            )}
           </div>
         </main>
       </div>
@@ -223,7 +228,8 @@ class Property extends PureComponent {
 Property.propTypes = {
   offer: placeCardPropTypes,
   nearPlaces: placesListPropTypes,
-  reviews: reviewsPropTypes,
+  reviews: PropTypes.arrayOf(reviewPropTypes),
+  setActiveCard: PropTypes.func,
 };
 
 export default Property;

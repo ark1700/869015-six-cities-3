@@ -1,4 +1,4 @@
-import {PureComponent} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from 'leaflet';
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types";
@@ -13,7 +13,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      null
+      <section className={`map ` + this.props.mapClass} id="map"></section>
     );
   }
 
@@ -68,6 +68,7 @@ Map.propTypes = {
       PropTypes.number
   ),
   placesList: placesListPropTypes,
+  mapClass: PropTypes.string
 };
 
 export default Map;

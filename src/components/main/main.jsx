@@ -5,6 +5,7 @@ import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {CityCoords, Cities} from "../../utils/consts.js";
+import {firstUpperLetter} from "../../utils/utils.js";
 
 const Main = (props) => {
   const {placesList, setActiveCard, activeCity} = props;
@@ -55,30 +56,51 @@ const Main = (props) => {
             `cities__places-container container
             ${noPlaces ? `cities__places-container--empty` : ``}`
           }>
-            {noPlaces ?
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">We could not find any property availbale at the moment</p>
-                </div>
-              </section> :
-              <PlacesList
-                placesList={sortedPlacesList}
-                setActiveCard={setActiveCard}
-                activeCity={activeCity}
-              />
-            }
+            <section className="cities__places places">
+
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">
+                {placesList.length} places to stay in {firstUpperLetter(activeCity)}
+              </b>
+              <form className="places__sorting" action="#" method="get">
+                <span className="places__sorting-caption">Sort by</span>
+                <span className="places__sorting-type" tabIndex="0">
+                  Popular
+                  <svg className="places__sorting-arrow" width="7" height="4">
+                    <use xlinkHref="#icon-arrow-select"> </use>
+                  </svg>
+                </span>
+                <ul className="places__options places__options--custom">
+                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
+                  <li className="places__option" tabIndex="0">Price: low to high</li>
+                  <li className="places__option" tabIndex="0">Price: high to low</li>
+                  <li className="places__option" tabIndex="0">Top rated first</li>
+                </ul>
+              </form>
+              {noPlaces ?
+                <section className="cities__no-places">
+                  <div className="cities__status-wrapper tabs__content">
+                    <b className="cities__status">No places to stay available</b>
+                    <p className="cities__status-description">We could not find any property availbale at the moment</p>
+                  </div>
+                </section> :
+                <PlacesList
+                  placesList={sortedPlacesList}
+                  setActiveCard={setActiveCard}
+                  cardClass={`cities__place-card`}
+                  listClass={`cities__places-list tabs__content`}
+                />
+              }
+            </section>
 
             <div className="cities__right-section">
-              <section className="cities__map map" id="map">
-                {noPlaces ?
-                  null :
-                  <Map
-                    placesList={sortedPlacesList}
-                    cityCoords={CityCoords[activeCity]}
-                  />
-                }
-              </section>
+              {!noPlaces && (
+                <Map
+                  placesList={sortedPlacesList}
+                  cityCoords={CityCoords[activeCity]}
+                  mapClass={`cities__map`}
+                />
+              )}
             </div>
           </div>
         </div>

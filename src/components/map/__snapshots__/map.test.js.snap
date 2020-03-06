@@ -1,3 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Map 1`] = `null`;
+exports[`Render Map 1`] = `
+<section
+  className="map undefined"
+  id="map"
+/>
+`;

@@ -14,9 +14,10 @@ class PlaceCard extends PureComponent {
 
   render() {
     const {photos, title, price, type, rating, isFavorite, isPremium} = this.props.placeCard;
+    const {cardClass} = this.props;
     return (
       <article
-        className="cities__place-card place-card"
+        className={`place-card ` + cardClass}
         key={name}
         onMouseOver={this.handlePlaceCardMouseOver}>
 
@@ -67,6 +68,7 @@ class PlaceCard extends PureComponent {
 PlaceCard.propTypes = {
   placeCard: placeCardPropTypes,
   setActiveCard: PropTypes.func,
+  cardClass: PropTypes.string,
 };
 
 export default PlaceCard;

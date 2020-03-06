@@ -30,6 +30,7 @@ class App extends PureComponent {
               offer={activeCard}
               reviews={reviews}
               nearPlaces={nearPlaces}
+              setActiveCard={setActiveCard}
             />
           </Route>
         </Switch>
