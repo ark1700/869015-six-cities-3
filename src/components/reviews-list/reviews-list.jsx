@@ -11,13 +11,13 @@ const ReviewsList = (props) => {
   return (
     <ul className="reviews__list">
       {reviews
-        .slice(-MAX_REVIEWS_NUMBER)
         .sort((a, b) => {
           if (moment(b.date).isAfter(a.date)) {
             return -1;
           }
           return 1;
         })
+        .slice(-MAX_REVIEWS_NUMBER)
         .map((review, i) => {
           return (
             <Review
