@@ -58,7 +58,7 @@ exports[`Render App 1`] = `
   </header>
   <main
     className="page__main page__main--index
-        null"
+          "
   >
     <h1
       className="visually-hidden"
@@ -110,7 +110,7 @@ exports[`Render App 1`] = `
     >
       <div
         className="cities__places-container container
-            "
+              "
       >
         <section
           className="cities__places places"
@@ -131,11 +131,12 @@ exports[`Render App 1`] = `
             action="#"
             className="places__sorting"
             method="get"
+            onClick={[Function]}
           >
             <span
               className="places__sorting-caption"
             >
-              Sort by
+              Sort by 
             </span>
             <span
               className="places__sorting-type"
@@ -159,24 +160,28 @@ exports[`Render App 1`] = `
             >
               <li
                 className="places__option places__option--active"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Top rated first

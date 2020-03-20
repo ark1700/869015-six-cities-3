@@ -203,7 +203,7 @@ class Property extends PureComponent {
             {!(nearPlaces === undefined || nearPlaces.length === 0) && (
               <Map
                 cityCoords={CityCoords[city]}
-                placesList={nearPlaces}
+                placesList={[...nearPlaces, this.props.offer]}
                 mapClass={`property__map`}
               />
             )}
