@@ -54,7 +54,6 @@ class PlacesList extends PureComponent {
       default:
         sortedPlacesList = placesList.slice();
         break;
-
     }
     return sortedPlacesList;
   }
