@@ -13,12 +13,11 @@ class PlaceCard extends PureComponent {
   }
 
   render() {
-    const {photos, title, price, type, rating, isFavorite, isPremium} = this.props.placeCard;
+    const {previewImage, title, price, type, rating, isFavorite, isPremium} = this.props.placeCard;
     const {cardClass} = this.props;
     return (
       <article
         className={`place-card ` + cardClass}
-        key={name}
         onMouseOver={this.handlePlaceCardMouseOver}>
 
         {isPremium ?
@@ -29,7 +28,7 @@ class PlaceCard extends PureComponent {
         }
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
-            <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Place image" />
+            <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
           </a>
         </div>
         <div className="place-card__info">

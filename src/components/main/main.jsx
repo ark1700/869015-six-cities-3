@@ -4,8 +4,9 @@ import PlacesList from "../places-list/places-list.jsx";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
-import {CityCoords, Cities, SortTypes} from "../../utils/consts.js";
+import {SortTypes} from "../../utils/consts.js";
 import {firstUpperLetter} from "../../utils/utils.js";
+import {cityPropTypes} from "../../prop-types/city.prop-types";
 import Sort from "../sort/sort.jsx";
 
 
@@ -23,7 +24,7 @@ class Main extends PureComponent {
     const activeSortType = this.state.activeSortType;
     const noPlaces = placesList === undefined || placesList.length === 0;
     const sortedPlacesList = placesList.filter((placeItem) => {
-      return placeItem.city === this.props.activeCity;
+      return placeItem.city.name === this.props.activeCity.name;
     });
     return (
       <div className="page page--gray page--main">
@@ -68,38 +69,38 @@ class Main extends PureComponent {
               `cities__places-container container
               ${noPlaces ? `cities__places-container--empty` : ``}`
             }>
-              <section className="cities__places places">
-
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">
-                  {sortedPlacesList.length} places to stay in {firstUpperLetter(activeCity)}
-                </b>
-                <Sort
-                  activeSortType={activeSortType}
-                  setSortType={this.setSortType}
-                />
-                {noPlaces ?
-                  <section className="cities__no-places">
-                    <div className="cities__status-wrapper tabs__content">
-                      <b className="cities__status">No places to stay available</b>
-                      <p className="cities__status-description">We could not find any property availbale at the moment</p>
-                    </div>
-                  </section> :
-                  <PlacesList
+              {noPlaces ?
+                <section className="cities__no-places">
+                  <div className="cities__status-wrapper tabs__content">
+                    <b className="cities__status">No places to stay available</b>
+                    <p className="cities__status-description">We could not find any property availbale at the moment</p>
+                  </div>
+                </section> :
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">
+                    {sortedPlacesList.length} places to stay in {firstUpperLetter(activeCity.name)}
+                  </b>
+                  {<Sort
+                    activeSortType={activeSortType}
+                    setSortType={this.setSortType}
+                  />}
+                  {<PlacesList
                     sortType={activeSortType}
                     placesList={sortedPlacesList}
                     setActiveCard={setActiveCard}
                     cardClass={`cities__place-card`}
                     listClass={`cities__places-list tabs__content`}
-                  />
-                }
-              </section>
+                  />}
+                </section>
+              }
 
               <div className="cities__right-section">
                 {!noPlaces && (
                   <Map
                     placesList={sortedPlacesList}
-                    cityCoords={CityCoords[activeCity]}
+                    cityCoords={[activeCity.location.latitude, activeCity.location.longitude]}
+                    zoom={activeCity.location.zoom}
                     mapClass={`cities__map`}
                   />
                 )}
@@ -119,7 +120,7 @@ class Main extends PureComponent {
 Main.propTypes = {
   placesList: placesListPropTypes,
   setActiveCard: PropTypes.func,
-  activeCity: PropTypes.oneOf(Object.values(Cities)),
+  activeCity: cityPropTypes,
 };
 
 

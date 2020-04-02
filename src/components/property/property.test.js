@@ -2,7 +2,6 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Property from "./property.jsx";
 import configureStore from "redux-mock-store";
-import {Cities} from '../../utils/consts';
 import {Provider} from "react-redux";
 import {BrowserRouter, Route} from "react-router-dom";
 
@@ -93,7 +92,7 @@ const placesList = [
 
 const store = mockStore({
   offersList: placesList,
-  activeCity: Cities.AMSTERDAM,
+  activeCity: `hamburg`,
 });
 
 it(`Should Property render correctly`, () => {

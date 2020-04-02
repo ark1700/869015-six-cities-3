@@ -1,30 +1,44 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
-import {Cities} from "../../utils/consts.js";
 import {firstUpperLetter} from "../../utils/utils.js";
 import {connect} from "react-redux";
-import {ActionType} from "../../reducer";
+import {cityPropTypes} from "../../prop-types/city.prop-types";
+import {ActionType as DataActionType} from "../../reducer/data/data";
 
 const MAX_OFFERS_NUMBER = 6;
 
-const getSixUniqueCities = (offersList) => {
+const getSixUniqueCitiesName = (offersList) => {
   return Array.from(
       new Set(
-          offersList.map((placeItem) => placeItem.city)
+          offersList.map((placeItem) => placeItem.city.name)
       )
   ).slice(-MAX_OFFERS_NUMBER);
 };
 
-class CardList extends PureComponent {
+const getSixUniqueCities = (offersList) => {
+  const uniqCitiesNames = getSixUniqueCitiesName(offersList);
+  return uniqCitiesNames.map((cityName) => {
+    let city = {};
+    for (const offer of offersList) {
+      if (offer.city.name === cityName) {
+        city = offer.city;
+        break;
+      }
+    }
+    return city;
+  });
+};
+
+class CitiesList extends PureComponent {
   render() {
     const {placesList, activeCity, setActiveCity} = this.props;
-    const cities = getSixUniqueCities(placesList);
+    const uniqCities = getSixUniqueCities(placesList);
     return (
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city, i) => {
-            const isActive = activeCity === city;
+          {uniqCities.map((city, i) => {
+            const isActive = activeCity.name === city.name;
             const cityClickHandler = () => {
               return setActiveCity(city);
             };
@@ -35,7 +49,7 @@ class CardList extends PureComponent {
                   ${isActive ? `tabs__item--active` : ``}`}
                   href="#" onClick={cityClickHandler}>
                   <span>
-                    {firstUpperLetter(city)}
+                    {firstUpperLetter(city.name)}
                   </span>
                 </a>
               </li>
@@ -45,40 +59,27 @@ class CardList extends PureComponent {
       </section>
     );
   }
-
-  componentDidMount() {
-    const {placesList, setActiveCity} = this.props;
-    const cities = getSixUniqueCities(placesList);
-    if (cities) {
-      setActiveCity(cities[0]);
-    }
-  }
-
-  componentWillUnmount() {
-    const {setActiveCity} = this.props;
-    setActiveCity(null);
-  }
 }
 
-CardList.propTypes = {
+CitiesList.propTypes = {
   placesList: placesListPropTypes,
-  activeCity: PropTypes.oneOf(Object.values(Cities)),
+  activeCity: cityPropTypes,
   setActiveCity: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  placesList: state.offersList,
-  activeCity: state.activeCity,
+  placesList: state.DATA.offersList,
+  activeCity: state.DATA.activeCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveCity(city) {
     dispatch({
-      type: ActionType.SET_ACTIVE_СITY,
+      type: DataActionType.SET_ACTIVE_СITY,
       payload: city,
     });
   },
 });
 
-export {CardList};
-export default connect(mapStateToProps, mapDispatchToProps)(CardList);
+export {CitiesList};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

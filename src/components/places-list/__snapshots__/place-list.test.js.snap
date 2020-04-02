@@ -141,7 +141,7 @@ exports[`Should PlacesList render correctly 1`] = `
             className="place-card__price-value"
           >
             €
-            120
+            300
           </b>
           <span
             className="place-card__price-text"
@@ -150,7 +150,7 @@ exports[`Should PlacesList render correctly 1`] = `
           </span>
         </div>
         <button
-          className="place-card__bookmark-button  button place-card__bookmark-button--active"
+          className="place-card__bookmark-button  button "
           type="button"
         >
           <svg
@@ -178,7 +178,7 @@ exports[`Should PlacesList render correctly 1`] = `
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "40%",
               }
             }
           />
@@ -196,13 +196,13 @@ exports[`Should PlacesList render correctly 1`] = `
           href="/offer"
           onClick={[Function]}
         >
-          Canal View Prinsengracht
+          House in countryside
         </a>
       </h2>
       <p
         className="place-card__type"
       >
-        Apartment
+        room
       </p>
     </div>
   </article>

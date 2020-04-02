@@ -6,10 +6,10 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types";
 import {placeCardPropTypes} from "../../prop-types/place-card.prop-types";
 import {connect} from "react-redux";
-import {ActionType} from "../../reducer.js";
-import {Cities} from "../../utils/consts.js";
+import {ActionType as DataActionType} from "../../reducer/data/data";
 import {reviews} from "../../mocks/reviews.js";
 import {nearPlaces} from "../../mocks/near-places";
+import {cityPropTypes} from "../../prop-types/city.prop-types";
 
 
 class App extends PureComponent {
@@ -44,19 +44,19 @@ App.propTypes = {
   setActiveCard: PropTypes.func,
   setActiveCity: PropTypes.func,
   activeCard: placeCardPropTypes,
-  activeCity: PropTypes.oneOf(Object.values(Cities)),
+  activeCity: cityPropTypes,
 };
 
 const mapStateToProps = (state) => ({
-  activeCard: state.activeCard,
-  placesList: state.offersList,
-  activeCity: state.activeCity,
+  activeCard: state.DATA.activeCard,
+  placesList: state.DATA.offersList,
+  activeCity: state.DATA.activeCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveCard(placeItem) {
     dispatch({
-      type: ActionType.SET_ACTIVE_CARD,
+      type: DataActionType.SET_ACTIVE_CARD,
       payload: placeItem,
     });
   },

@@ -1,24 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import generateOffers from "./mocks/offers.js";
-import {createStore} from "redux";
+import {createStore, applyMiddleware, compose} from "redux";
 import {Provider} from "react-redux";
-import {reducer, ActionType} from "./reducer.js";
+import reducer from "./reducer/reducer.js";
+import thunk from "redux-thunk";
+import {createAPI} from "./api.js";
+import {Operation as DataOperation} from "./reducer/data/data.js";
+import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 
-const OFFERS_NUMBER = 4;
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+};
 
-const placesList = generateOffers(OFFERS_NUMBER);
-
+const api = createAPI(onUnauthorized);
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    compose(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
 );
 
-store.dispatch({
-  type: ActionType.SET_OFFERS,
-  payload: placesList,
-});
+store.dispatch(DataOperation.loadOffers());
+store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>

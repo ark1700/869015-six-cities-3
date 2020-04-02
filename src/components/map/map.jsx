@@ -27,7 +27,7 @@ class Map extends PureComponent {
   componentDidUpdate(prevProps) {
     if (prevProps.cityCoords !== this.props.cityCoords ||
       prevProps.activeCard !== this.props.activeCard) {
-      const zoom = 12;
+      const zoom = this.props.zoom;
       this.map.setView(this.props.cityCoords, zoom);
       this.removeMarkers();
       this.markers = [];
@@ -41,7 +41,7 @@ class Map extends PureComponent {
 
   createMap() {
     const city = this.props.cityCoords;
-    const zoom = 12;
+    const zoom = this.props.zoom;
     this.map = leaflet.map(`map`, {
       center: city,
       zoom,
@@ -59,12 +59,12 @@ class Map extends PureComponent {
   }
 
   addMarkers() {
-    const mapCoords = this.props.placesList.map((offer) => offer.map);
+    const mapCoords = this.props.placesList.map((offer) => offer.map.location);
     mapCoords.forEach((coordinate) => {
       let isActive = false;
       if (this.props.activeCard &&
-      coordinate[0] === this.props.activeCard.map[0] &&
-      coordinate[1] === this.props.activeCard.map[1]) {
+      coordinate[0] === this.props.activeCard.map.location[0] &&
+      coordinate[1] === this.props.activeCard.map.location[1]) {
         isActive = true;
       }
       const icon = this.icon(isActive);
@@ -93,14 +93,15 @@ class Map extends PureComponent {
 Map.propTypes = {
   cityCoords: PropTypes.arrayOf(
       PropTypes.number
-  ),
+  ).isRequired,
   placesList: placesListPropTypes,
   mapClass: PropTypes.string,
   activeCard: placeCardPropTypes,
+  zoom: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeCard: state.activeCard,
+  activeCard: state.DATA.activeCard,
 });
 
 export {Map};

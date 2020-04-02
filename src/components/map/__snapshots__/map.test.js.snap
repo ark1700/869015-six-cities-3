@@ -2,7 +2,7 @@
 
 exports[`Render Map 1`] = `
 <section
-  className="map undefined"
+  className="map cities__map"
   id="map"
 />
 `;
