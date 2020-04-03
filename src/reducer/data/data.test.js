@@ -1,8 +1,6 @@
-import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
-import {reducer, ActionType, Operation} from "./data.js";
-
-const api = createAPI(() => {});
+// import MockAdapter from "axios-mock-adapter";
+// import {createAPI} from "../../api.js";
+import {reducer, ActionType} from "./data.js";
 
 const placesList = [
   {
@@ -115,20 +113,18 @@ const placesList = [
   },
 ];
 
+const initialState = {
+  activeCity: null,
+  offersList: [],
+  activeCard: null,
+};
+
 it(`Reducer without additional parameters should return initial state`, () => {
-  expect(reducer(void 0, {})).toEqual({
-    activeCity: null,
-    offersList: [],
-    activeCard: null,
-  });
+  expect(reducer(void 0, {})).toEqual(initialState);
 });
 
 it(`Reducer should set new activeCity`, () => {
-  expect(reducer({
-    activeCity: null,
-    offersList: [],
-    activeCard: null,
-  }, {
+  expect(reducer(initialState, {
     type: ActionType.LOAD_OFFERS,
     payload: placesList,
   })).toEqual({
@@ -138,26 +134,26 @@ it(`Reducer should set new activeCity`, () => {
   });
 });
 
-describe(`Operation work correctly`, () => {
-  it(`Should make a correct API call to /hotels`, function () {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const offersLoader = Operation.loadOffers();
+// describe(`Operation work correctly`, () => {
+//   it(`Should make a correct API call to /hotels`, function () {
+//     const apiMock = new MockAdapter(api);
+//     const dispatch = jest.fn();
+//     const offersLoader = Operation.loadOffers();
 
-    apiMock
-      .onGet(`/hotels`)
-      .reply(200, [{fake: true}]);
+//     apiMock
+//       .onGet(`/hotels`)
+//       .reply(200, [{fake: true}]);
 
-    return offersLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_OFFERS,
-          payload: [{fake: true}],
-        });
-      });
-  });
-});
+//     return offersLoader(dispatch, () => {}, api)
+//       .then(() => {
+//         expect(dispatch).toHaveBeenCalledTimes(1);
+//         expect(dispatch).toHaveBeenNthCalledWith(1, {
+//           type: ActionType.LOAD_OFFERS,
+//           payload: [{fake: true}],
+//         });
+//       });
+//   });
+// });
 
 
 // import {reducer, ActionType} from "./reducer/reducer.js";

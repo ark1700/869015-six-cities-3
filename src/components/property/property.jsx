@@ -2,11 +2,11 @@ import React, {PureComponent} from "react";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import {getRaitingWidth} from "../../utils/utils.js";
 import {placeCardPropTypes} from "../../prop-types/place-card.prop-types.js";
-import Map from "../map/map.jsx";
-import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
+// import Map from "../map/map.jsx";
+// import {placesListPropTypes} from "../../prop-types/places-list.prop-types.js";
 import {reviewPropTypes} from "../../prop-types/review.prop-types.js";
 import PropTypes from "prop-types";
-import PlacesList from "../places-list/places-list.jsx";
+// import PlacesList from "../places-list/places-list.jsx";
 
 class Property extends PureComponent {
   constructor(props) {
@@ -47,9 +47,9 @@ class Property extends PureComponent {
   }
 
   render() {
-    const {photos, isPremium, price, title, descr, type, badrooms, guests, rating, features, city} = this.props.offer;
+    const {photos, isPremium, price, title, descr, type, badrooms, guests, rating, features} = this.props.offer;
     const {name, avatar, isSuper} = this.props.offer.author;
-    const {reviews, nearPlaces, setActiveCard} = this.props;
+    const {reviews} = this.props;
 
     return (
       <div className="page">
