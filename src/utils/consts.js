@@ -5,5 +5,12 @@ const SortTypes = {
   TOP_RATED: `Top rated first`
 };
 
-export {SortTypes};
+const AppRoute = {
+  getLogin: () => `/login`,
+  getOffer: (id) => `/offer/${id}`,
+  getFavorites: () => `/favorites`,
+  getRoot: () => `/`,
+};
+
+export {SortTypes, AppRoute};
 

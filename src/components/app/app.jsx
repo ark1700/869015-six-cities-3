@@ -10,7 +10,9 @@ import {ActionType as DataActionType} from "../../reducer/data/data";
 import {reviews} from "../../mocks/reviews.js";
 import {nearPlaces} from "../../mocks/near-places";
 import {cityPropTypes} from "../../prop-types/city.prop-types";
-
+import SignIn from "../sign-in/sign-in.jsx";
+import {Operation as UserOperation} from '../../reducer/user/user';
+import DataSelector from '../../reducer/data/selectors.js';
 
 class App extends PureComponent {
   render() {
@@ -33,6 +35,9 @@ class App extends PureComponent {
               setActiveCard={setActiveCard}
             />
           </Route>
+          <Route exact path="/login">
+            <SignIn onSubmit={{}}/>
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -48,12 +53,15 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCard: state.DATA.activeCard,
-  placesList: state.DATA.offersList,
-  activeCity: state.DATA.activeCity,
+  activeCard: DataSelector.getActiveCard(state),
+  placesList: DataSelector.getOffers(state),
+  activeCity: DataSelector.getActiveCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
   setActiveCard(placeItem) {
     dispatch({
       type: DataActionType.SET_ACTIVE_CARD,

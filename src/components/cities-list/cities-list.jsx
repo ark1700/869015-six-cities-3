@@ -5,6 +5,7 @@ import {firstUpperLetter} from "../../utils/utils.js";
 import {connect} from "react-redux";
 import {cityPropTypes} from "../../prop-types/city.prop-types";
 import {ActionType as DataActionType} from "../../reducer/data/data";
+import DataSelectors from "../../reducer/data/selectors.js";
 
 const MAX_OFFERS_NUMBER = 6;
 
@@ -68,8 +69,8 @@ CitiesList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  placesList: state.DATA.offersList,
-  activeCity: state.DATA.activeCity,
+  placesList: DataSelectors.getOffers(state),
+  activeCity: DataSelectors.getActiveCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

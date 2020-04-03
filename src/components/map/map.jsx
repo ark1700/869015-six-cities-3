@@ -4,6 +4,7 @@ import leaflet from 'leaflet';
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types";
 import {connect} from "react-redux";
 import {placeCardPropTypes} from "../../prop-types/place-card.prop-types";
+import DataSelectors from "../../reducer/data/selectors.js";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -101,7 +102,7 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCard: state.DATA.activeCard,
+  activeCard: DataSelectors.getActiveCard(state),
 });
 
 export {Map};

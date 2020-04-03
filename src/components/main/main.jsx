@@ -9,7 +9,6 @@ import {firstUpperLetter} from "../../utils/utils.js";
 import {cityPropTypes} from "../../prop-types/city.prop-types";
 import Sort from "../sort/sort.jsx";
 
-
 class Main extends PureComponent {
   constructor(props) {
     super(props);

@@ -3,13 +3,14 @@ const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+const ActionType = {
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
+};
+
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
-const ActionType = {
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-};
 
 const ActionCreator = {
   requireAuthorization: (status) => {
