@@ -1,31 +1,41 @@
-const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
+
+import {AuthorizationStatus, AppRoute} from '../../utils/consts';
 
 const ActionType = {
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
+  SET_AUTH_STATUS: `SET_AUTH_STATUS`,
+  SET_LOGIN_INFO: `SET_LOGIN_INFO`,
 };
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  loginInfo: null,
 };
 
 
 const ActionCreator = {
-  requireAuthorization: (status) => {
+  setAuthStatus: (status) => {
     return {
-      type: ActionType.REQUIRED_AUTHORIZATION,
+      type: ActionType.SET_AUTH_STATUS,
       payload: status,
+    };
+  },
+  setLoginInfo: (authInfo) => {
+    return {
+      type: ActionType.SET_LOGIN_INFO,
+      payload: authInfo,
     };
   },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
+    case ActionType.SET_AUTH_STATUS:
       return Object.assign({}, state, {
         authorizationStatus: action.payload,
+      });
+    case ActionType.SET_LOGIN_INFO:
+      return Object.assign({}, state, {
+        loginInfo: action.payload,
       });
   }
 
@@ -34,9 +44,10 @@ const reducer = (state = initialState, action) => {
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
-      .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+    return api.get(AppRoute.getLogin())
+      .then((response) => {
+        dispatch(ActionCreator.setAuthStatus(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setLoginInfo(response.data));
       })
       .catch((err) => {
         throw err;
@@ -44,12 +55,13 @@ const Operation = {
   },
 
   login: (authData) => (dispatch, getState, api) => {
-    return api.post(`/login`, {
+    return api.post(AppRoute.getLogin(), {
       email: authData.login,
       password: authData.password,
     })
       .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setAuthStatus(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setLoginInfo(authData));
       });
   },
 };

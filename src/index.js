@@ -7,10 +7,11 @@ import reducer from "./reducer/reducer.js";
 import thunk from "redux-thunk";
 import {createAPI} from "./api.js";
 import {Operation as DataOperation} from "./reducer/data/data.js";
-import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
+import {Operation as UserOperation, ActionCreator} from "./reducer/user/user.js";
+import {AuthorizationStatus} from "./utils/consts";
 
 const onUnauthorized = () => {
-  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+  store.dispatch(ActionCreator.setAuthStatus(AuthorizationStatus.NO_AUTH));
 };
 
 const api = createAPI(onUnauthorized);

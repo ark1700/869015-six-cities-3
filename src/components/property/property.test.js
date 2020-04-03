@@ -91,12 +91,27 @@ const placesList = [
 ];
 
 const store = mockStore({
-  offersList: placesList,
-  activeCity: `hamburg`,
+  DATA: {
+    offersList: placesList,
+    activeCity: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      }
+    },
+    activeCard: null
+  },
+  USER: {
+    authorizationStatus: `NO_AUTH`,
+    loginInfo: null
+  }
 });
 
 it(`Should Property render correctly`, () => {
   const property = {
+    id: 1,
     city: `amsterdam`,
     photos: [
       `img/room.jpg`,

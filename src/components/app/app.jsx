@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, BrowserRouter, Redirect} from "react-router-dom";
 import {placesListPropTypes} from "../../prop-types/places-list.prop-types";
 import {placeCardPropTypes} from "../../prop-types/place-card.prop-types";
 import {connect} from "react-redux";
@@ -13,10 +13,12 @@ import {cityPropTypes} from "../../prop-types/city.prop-types";
 import SignIn from "../sign-in/sign-in.jsx";
 import {Operation as UserOperation} from '../../reducer/user/user';
 import DataSelector from '../../reducer/data/selectors.js';
+import UserSelector from '../../reducer/user/selectors.js';
+import {AuthorizationStatus} from '../../utils/consts';
 
 class App extends PureComponent {
   render() {
-    const {placesList, activeCard, setActiveCard, activeCity} = this.props;
+    const {placesList, activeCard, setActiveCard, activeCity, authStatus} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -36,7 +38,9 @@ class App extends PureComponent {
             />
           </Route>
           <Route exact path="/login">
-            <SignIn onSubmit={{}}/>
+            {authStatus === AuthorizationStatus.AUTH ? <Redirect to="/" /> :
+              <SignIn />
+            }
           </Route>
         </Switch>
       </BrowserRouter>
@@ -50,12 +54,16 @@ App.propTypes = {
   setActiveCity: PropTypes.func,
   activeCard: placeCardPropTypes,
   activeCity: cityPropTypes,
+  authStatus: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   activeCard: DataSelector.getActiveCard(state),
   placesList: DataSelector.getOffers(state),
   activeCity: DataSelector.getActiveCity(state),
+  authStatus: UserSelector.getAuthStatus(state),
+  loginInfo: UserSelector.getUserInfo(state),
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

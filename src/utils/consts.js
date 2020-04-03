@@ -12,5 +12,10 @@ const AppRoute = {
   getRoot: () => `/`,
 };
 
-export {SortTypes, AppRoute};
+const AuthorizationStatus = {
+  NO_AUTH: `NO_AUTH`,
+  AUTH: `AUTH`,
+};
+
+export {SortTypes, AppRoute, AuthorizationStatus};
 

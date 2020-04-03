@@ -122,14 +122,18 @@ it(`Render App`, () => {
     DATA: {
       offersList: placesList,
       activeCity: {
-        name: `Hamburg`,
+        name: `Amsterdam`,
         location: {
-          latitude: 53.550341,
-          longitude: 10.000654,
+          latitude: 52.37454,
+          longitude: 4.897976,
           zoom: 13
-        },
+        }
       },
-      activeCard: placesList[0],
+      activeCard: null
+    },
+    USER: {
+      authorizationStatus: `NO_AUTH`,
+      loginInfo: null
     }
   });
 
